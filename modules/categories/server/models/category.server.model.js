@@ -16,6 +16,9 @@ var CategorySchema = new Schema({
     required: 'Please fill Category name',
     trim: true
   },
+  pic: {
+    type: String
+  },
   created: {
     type: Date,
     default: Date.now

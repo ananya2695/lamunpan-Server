@@ -16,6 +16,25 @@ var ProductSchema = new Schema({
     required: 'Please fill Product name',
     trim: true
   },
+  detail: {
+    type: String,
+    default: ''
+  },
+  size: {
+    type: [{
+      size: String,
+      price: Number
+    }]
+  },
+  type: {
+    type: [{
+      name: String,
+      price: Number
+    }]
+  },
+  pic: {
+    type: String
+  },
   created: {
     type: Date,
     default: Date.now
