@@ -117,7 +117,160 @@ exports.productByID = function (req, res, next, id) {
 };
 
 exports.getProductByCate = function (req, res) {
-  res.jsonp('items');
+  res.jsonp({
+    products: [{
+        category: 'coffee',
+        name: 'americano',
+        detail: 'กาแฟอเมริกาโน่แท้',
+        size: [{
+          size: 's',
+          price: 20
+        }],
+        type: [{
+            name: 'hot',
+            price: 10
+          },
+          {
+            name: 'cold',
+            price: 20
+          },
+          {
+            name: 'frappe',
+            price: 25
+          }
+        ],
+        pic: 'http://www.fusioncaffe.com/wp-content/uploads/2014/04/Caff%C3%A8-Americano.jpg'
+      },
+      {
+        category: 'coffee',
+        name: 'esspresso',
+        detail: 'เอสเปสโซ่อร่อยมาก',
+        size: [{
+            size: 's',
+            price: 20
+          },
+          {
+            size: 'm',
+            price: 30
+          },
+          {
+            size: 'l',
+            price: 40
+          }
+        ],
+        type: [{
+            name: 'hot',
+            price: 10
+          },
+          {
+            name: 'cold',
+            price: 20
+          },
+          {
+            name: 'frappe',
+            price: 25
+          }
+        ],
+        pic: 'https://www.caffeineinformer.com/wp-content/caffeine/espresso.jpg'
+      },
+      {
+        category: 'coffee',
+        name: 'latte',
+        detail: 'ลาเต้แสนอร่อย',
+        size: [{
+            size: 's',
+            price: 20
+          },
+          {
+            size: 'm',
+            price: 30
+          },
+          {
+            size: 'l',
+            price: 40
+          }
+        ],
+        type: [{
+            name: 'hot',
+            price: 10
+          },
+          {
+            name: 'cold',
+            price: 20
+          },
+          {
+            name: 'frappe',
+            price: 25
+          }
+        ],
+        pic: 'http://caffeinekeyboard.com/wp-content/uploads/2017/06/%E0%B8%A5%E0%B8%B2%E0%B9%80%E0%B8%95%E0%B9%89.jpg'
+      },
+      {
+        category: 'coffee',
+        name: 'cappucino',
+        detail: 'คาปูชิโน่ของแท้',
+        size: [{
+            size: 's',
+            price: 20
+          },
+          {
+            size: 'm',
+            price: 30
+          },
+          {
+            size: 'l',
+            price: 40
+          }
+        ],
+        type: [{
+            name: 'hot',
+            price: 10
+          },
+          {
+            name: 'cold',
+            price: 20
+          },
+          {
+            name: 'frappe',
+            price: 25
+          }
+        ],
+        pic: 'https://www.facebook.com/photo.php?fbid=1958336984488886&set=a.1958336924488892.1073741832.100009378112488&type=3&theater'
+      },
+      {
+        category: 'coffee',
+        name: 'nocha',
+        detail: 'ม่อคค่าอร่อยที่สุดในโลก',
+        size: [{
+            size: 's',
+            price: 20
+          },
+          {
+            size: 'm',
+            price: 30
+          },
+          {
+            size: 'l',
+            price: 40
+          }
+        ],
+        type: [{
+            name: 'hot',
+            price: 10
+          },
+          {
+            name: 'cold',
+            price: 20
+          },
+          {
+            name: 'frappe',
+            price: 25
+          }
+        ],
+        pic: 'https://scontent.fbkk5-5.fna.fbcdn.net/v/t1.0-9/24296284_1958336931155558_3175586781423821564_n.jpg?oh=80cf8e994e710a0933827399bf68b1a9&oe=5AD64AAD'
+      }
+    ]
+  });
 };
 
 exports.getProducAndCate = function (req, res) {
