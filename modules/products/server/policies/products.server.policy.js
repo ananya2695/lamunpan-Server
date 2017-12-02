@@ -38,6 +38,12 @@ exports.invokeRolesPolicies = function () {
     }, {
       resources: '/api/products/:productId',
       permissions: ['get']
+    }, {
+      resources: '/api/productsbycategories',
+      permissions: '*'
+    }, {
+      resources: '/api/productandcate',
+      permissions: '*'
     }]
   }]);
 };
