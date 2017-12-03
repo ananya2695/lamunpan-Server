@@ -289,7 +289,7 @@ exports.getCategory = function (req, res, next) {
 };
 
 exports.getProducts = function (req, res, next) {
-  Product.find({}, '_id name detail pic size type category').sort('-created').populate('categories').exec(function (err, products) {
+  Product.find({}, '_id name detail pic size type category').sort('-created').populate('categories').skip(0).limit(3).exec(function (err, products) {
     if (err) {
       return res.status(400).send({
         message: errorHandler.getErrorMessage(err)
