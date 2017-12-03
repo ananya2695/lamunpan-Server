@@ -307,3 +307,42 @@ exports.cookingBestseller = function (req, res, next) {
     category: req.categories
   });
 };
+
+exports.cateID = function (req, res, next, cateid) {
+  Product.find({
+    category: cateid
+  }, '_id name detail pic size type category').sort('-created').populate('categories').exec(function (err, products) {
+    if (err) {
+      return res.status(400).send({
+        message: errorHandler.getErrorMessage(err)
+      });
+    } else {
+      req.products = products;
+      next();
+    }
+  });
+};
+
+exports.cookingProductList = function (req, res, next) {
+  var products = [];
+  req.products.forEach(function (element) {
+    products.push({
+      _id: element._id,
+      name: element.name,
+      pic: element.pic,
+      detail: element.detail,
+      size: element.size,
+      type: element.type,
+      category: element.category.name
+    });
+  });
+  req.productsCookingList = products;
+  next();
+};
+
+exports.productByCate = function (req, res) {
+  // console.log('data' + JSON.stringify(req.productsCookingList));
+  res.jsonp({
+    items: req.productsCookingList ? req.productsCookingList : []
+  });
+};
