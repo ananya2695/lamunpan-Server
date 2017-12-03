@@ -44,6 +44,9 @@ exports.invokeRolesPolicies = function () {
     }, {
       resources: '/api/productandcate',
       permissions: '*'
+    }, {
+      resources: '/api/productsbycate/:productbycateId',
+      permissions: '*'
     }]
   }]);
 };

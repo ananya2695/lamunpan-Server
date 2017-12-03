@@ -18,10 +18,10 @@ module.exports = function (app) {
     .delete(products.delete);
 
   app.route('/api/productsbycategories') //.all(productsPolicy.isAllowed)
-    .get(products.getCategory, products.getProducts, products.cookingBestseller);
+    .get(products.getCategory, products.getProducts, products.cookingProductList, products.cookingBestseller);
 
-  // app.route('/api/productandcate') //.all(productsPolicy.isAllowed)
-  //   .get(products.getProducAndCate);
   // Finish by binding the Product middleware
   app.param('productId', products.productByID);
+  app.param('productbycateId', products.cateID);
+
 };
