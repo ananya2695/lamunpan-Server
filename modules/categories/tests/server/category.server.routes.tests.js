@@ -51,7 +51,8 @@ describe('Category CRUD tests', function () {
     // Save a user to the test db and create new Category
     user.save(function () {
       category = {
-        name: 'Category name'
+        name: 'Category name',
+        pic: 'image',
       };
 
       done();
@@ -59,46 +60,35 @@ describe('Category CRUD tests', function () {
   });
 
   it('should be able to save a Category if logged in', function (done) {
-    agent.post('/api/auth/signin')
-      .send(credentials)
+
+    // Save a new Category
+    agent.post('/api/categories')
+      .send(category)
       .expect(200)
-      .end(function (signinErr, signinRes) {
-        // Handle signin error
-        if (signinErr) {
-          return done(signinErr);
+      .end(function (categorySaveErr, categorySaveRes) {
+        // Handle Category save error
+        if (categorySaveErr) {
+          return done(categorySaveErr);
         }
 
-        // Get the userId
-        var userId = user.id;
-
-        // Save a new Category
-        agent.post('/api/categories')
-          .send(category)
-          .expect(200)
-          .end(function (categorySaveErr, categorySaveRes) {
-            // Handle Category save error
-            if (categorySaveErr) {
-              return done(categorySaveErr);
+        // Get a list of Categories
+        agent.get('/api/categories')
+          .end(function (categoriesGetErr, categoriesGetRes) {
+            // Handle Categories save error
+            if (categoriesGetErr) {
+              return done(categoriesGetErr);
             }
 
-            // Get a list of Categories
-            agent.get('/api/categories')
-              .end(function (categoriesGetErr, categoriesGetRes) {
-                // Handle Categories save error
-                if (categoriesGetErr) {
-                  return done(categoriesGetErr);
-                }
+            // Get Categories list
+            var categories = categoriesGetRes.body;
 
-                // Get Categories list
-                var categories = categoriesGetRes.body;
+            // Set assertions
+            // (categories[0].user._id).should.equal(userId);
+            (categories[0].name).should.match('Category name');
 
-                // Set assertions
-                (categories[0].user._id).should.equal(userId);
-                (categories[0].name).should.match('Category name');
+            // Call the assertion callback
+            done();
 
-                // Call the assertion callback
-                done();
-              });
           });
       });
   });
