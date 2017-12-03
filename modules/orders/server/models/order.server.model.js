@@ -10,19 +10,22 @@ var mongoose = require('mongoose'),
  * Order Schema
  */
 var OrderSchema = new Schema({
-  name: {
+  products: [{
+    _id: {
+      type: Schema.ObjectId,
+      ref: 'Product'
+    },
+    size: String,
     type: String,
-    default: '',
-    required: 'Please fill Order name',
-    trim: true
-  },
+    qty: Number,
+    price: Number
+  }],
+  table: Number,
+  totalQty: Number,
+  totalPrice: Number,
   created: {
     type: Date,
     default: Date.now
-  },
-  user: {
-    type: Schema.ObjectId,
-    ref: 'User'
   }
 });
 
