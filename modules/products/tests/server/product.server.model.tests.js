@@ -6,12 +6,14 @@
 var should = require('should'),
   mongoose = require('mongoose'),
   User = mongoose.model('User'),
+  Category = mongoose.model('Category'),
   Product = mongoose.model('Product');
 
 /**
  * Globals
  */
 var user,
+  category,
   product;
 
 /**
@@ -28,23 +30,33 @@ describe('Product Model Unit Tests:', function () {
       password: 'password'
     });
 
+    category = new Category({
+      name: 'Category Name',
+      pic: 'http://www.fusioncaffe.com/wp-content/uploads/2014/04/Caff%C3%A8-Americano.jpg',
+      user: user
+    });
+
     user.save(function () {
-      product = new Product({
-        name: 'Product name',
-        detail: 'Product detail',
-        size: [{
-          size: 's',
-          price: 20
-        }],
-        type: [{
-          name: 'hot',
-          price: 10
-        }],
-        pic: 'http://www.fusioncaffe.com/wp-content/uploads/2014/04/Caff%C3%A8-Americano.jpg',
-        user: user
+      category.save(function () {
+        product = new Product({
+          name: 'Product name',
+          detail: 'Product detail',
+          size: [{
+            size: 's',
+            price: 20
+          }],
+          type: [{
+            name: 'hot',
+            price: 10
+          }],
+          pic: 'http://www.fusioncaffe.com/wp-content/uploads/2014/04/Caff%C3%A8-Americano.jpg',
+          category: category,
+          user: user
+        });
+
+        done();
       });
 
-      done();
     });
   });
 
@@ -69,8 +81,10 @@ describe('Product Model Unit Tests:', function () {
 
   afterEach(function (done) {
     Product.remove().exec(function () {
-      User.remove().exec(function () {
-        done();
+      Category.remove().exec(function () {
+        User.remove().exec(function () {
+          done();
+        });
       });
     });
   });

@@ -35,6 +35,10 @@ var ProductSchema = new Schema({
   pic: {
     type: String
   },
+  category: {
+    type: Schema.ObjectId,
+    ref: 'Category'
+  },
   created: {
     type: Date,
     default: Date.now
