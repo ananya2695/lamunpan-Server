@@ -304,7 +304,7 @@ exports.getProducts = function (req, res, next) {
 exports.cookingBestseller = function (req, res, next) {
   res.jsonp({
     bestseller: req.products,
-    category: req.productsCookingList
+    category: req.categories
   });
 };
 
@@ -333,7 +333,7 @@ exports.cookingProductList = function (req, res, next) {
       detail: element.detail,
       size: element.size,
       type: element.type,
-      category: element.category
+      category: element.category.name
     });
   });
   req.productsCookingList = products;
