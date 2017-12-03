@@ -8,7 +8,7 @@ var productsPolicy = require('../policies/products.server.policy'),
 
 module.exports = function (app) {
   // Products Routes
-  app.route('/api/products')//.all(productsPolicy.isAllowed)
+  app.route('/api/products') //.all(productsPolicy.isAllowed)
     .get(products.list)
     .post(products.create);
 
@@ -18,10 +18,10 @@ module.exports = function (app) {
     .delete(products.delete);
 
   app.route('/api/productsbycategories') //.all(productsPolicy.isAllowed)
-    .get(products.getProductByCate);
+    .get(products.getCategory, products.getProducts, products.cookingBestseller);
 
-  app.route('/api/productandcate') //.all(productsPolicy.isAllowed)
-    .get(products.getProducAndCate);
+  // app.route('/api/productandcate') //.all(productsPolicy.isAllowed)
+  //   .get(products.getProducAndCate);
   // Finish by binding the Product middleware
   app.param('productId', products.productByID);
 };
